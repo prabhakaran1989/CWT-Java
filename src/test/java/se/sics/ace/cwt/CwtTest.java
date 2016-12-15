@@ -39,6 +39,8 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.upokecenter.cbor.CBORObject;
 
@@ -58,6 +60,11 @@ import COSE.Signer;
  *
  */
 public class CwtTest {
+	
+	/**
+	 * Logger
+	 */
+	private static final Logger logger= LogManager.getLogger(CwtTest.class);
 	
     static OneKey publicKey;
     static OneKey privateKey;
@@ -96,6 +103,8 @@ public class CwtTest {
                 CBORObject.DecodeFromBytes(publicKey.EncodeToBytes()));
         claims.put("scope", CBORObject.FromObject(
         		"r+/s/light rwx+/a/led w+/dtls"));
+        
+        logger.debug(claims.toString());
     }
 
     /**
